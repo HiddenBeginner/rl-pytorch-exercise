@@ -33,8 +33,8 @@ def get_arguments():
     parser.add_argument('--lr', type=float, default=0.0002, help="Learning rate for updating policy's parameters.")
     parser.add_argument('--n_episodes', type=int, default=10000, help="The number of simulations for policy training.")
     parser.add_argument('--log_interval', type=int, default=100, help="The interval between training status logs.")
-    parser.add_argument('--render', type=bool, default=False, help="Whether to render the environment during training, "
-                                                                   "Note rendering the environment makes training significantly slower.")
+    parser.add_argument('--render', type=int, default=0, help="Whether to render the environment during training, "
+                                                              "Note rendering the environment makes training significantly slower.")
     args = parser.parse_args()
 
     return args

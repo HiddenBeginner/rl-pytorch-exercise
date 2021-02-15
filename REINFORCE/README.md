@@ -1,6 +1,5 @@
-## Environment
-[CartPole-v1](https://github.com/openai/gym/blob/master/gym/envs/classic_control/cartpole.py) was used.
-
+The REINFORCE algorithm with policy parameterized by 1 layer Artificial Neural Network.
+## Environment: OpenGYM [CartPole-v1](https://github.com/openai/gym/blob/master/gym/envs/classic_control/cartpole.py) 
 **state space**
 
 |Num|Observation|Min|Max|
@@ -18,6 +17,12 @@
 |1|Push cart to the right|
 
 **reward**: Reward is 1 for every step taken, including the termination step
+
+## Run
+~~~
+> (optional) cd REINFORCE
+> python train.py --dim_hidden 128 --gamma 0.98 --lr 0.0002 --n_episodes 10000 --log_interval 100 --render False
+~~~
 
 ## Result
 **The average rewards of last 100 episodes**
