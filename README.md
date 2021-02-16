@@ -4,7 +4,7 @@ Thanks to all [materials](#reference) that I've referenced.
 ## Contents
 |Algorithm|Environment|link|
 |:----|:----|:----|
-|REINFORCE|OpenGYM - CartPole-v1|[link](./REINFORCE)| 
+|REINFORCE|OpenGYM CartPole-v0|[link](./REINFORCE)| 
 
 
 ## <a name="reference">Reference</a>

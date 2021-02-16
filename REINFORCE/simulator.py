@@ -26,6 +26,7 @@ class Simulator:
         done = False
 
         data = []
+        score = 0.0
         while not done:
             s = torch.FloatTensor(s).to(self.device)
             a, p = self.select_action(s)
@@ -35,8 +36,9 @@ class Simulator:
             if self.render:
                 self.env.render()
             data.append((r, p))
+            score += r
 
-        return data
+        return data, score
 
 
 class Trainer(Simulator):
@@ -59,22 +61,20 @@ class Trainer(Simulator):
         loss.backward()
         self.optimizer.step()
 
-        return R
-
     def run(self, n_episodes, log_interval):
         now = time.time()
-        score = 0.0
+        scores = 0.0
         history = []
         self.policy.train()
         for i in range(n_episodes):
-            data = self.run_episode()
-            R = self.finish_episode(data)
-            score += R
+            data, score = self.run_episode()
+            self.finish_episode(data)
+            scores += score
             if (i + 1) % log_interval == 0:
-                print(f"[Episode {i + 1}] Average reward of last {log_interval} episodes: {score / log_interval} | " +
+                print(f"[Episode {i + 1}] Average reward of last {log_interval} episodes: {scores / log_interval} | " +
                       f"Elapsed time (sec): {time.time() - now:.3f} |", end='\r')
-                history.append(score / log_interval)
-                score = 0.0
+                history.append(scores / log_interval)
+                scores = 0.0
         return history
 
     def save(self):

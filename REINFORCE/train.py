@@ -30,7 +30,7 @@ def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dim_hidden', type=int, default=128, help="The number of nodes in the hidden layer")
     parser.add_argument('--gamma', type=float, default=0.98, help="Discounted rate for future returns.")
-    parser.add_argument('--lr', type=float, default=0.0002, help="Learning rate for updating policy's parameters.")
+    parser.add_argument('--lr', type=float, default=0.00015, help="Learning rate for updating policy's parameters.")
     parser.add_argument('--n_episodes', type=int, default=10000, help="The number of simulations for policy training.")
     parser.add_argument('--log_interval', type=int, default=100, help="The interval between training status logs.")
     parser.add_argument('--render', type=int, default=0, help="Whether to render the environment during training, "
@@ -43,7 +43,7 @@ def get_arguments():
 if __name__ == '__main__':
     args = get_arguments()
 
-    env = gym.make('CartPole-v1')
+    env = gym.make('CartPole-v0')
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     policy = Policy(dim_hidden=args.dim_hidden)
@@ -52,6 +52,3 @@ if __name__ == '__main__':
     # Train
     history = train(args)
     plot_result(history, args.log_interval)
-
-    # Test
-

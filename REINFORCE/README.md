@@ -1,5 +1,5 @@
 The REINFORCE algorithm with policy parameterized by 1 layer Artificial Neural Network.
-## Environment: OpenGYM [CartPole-v1](https://github.com/openai/gym/blob/master/gym/envs/classic_control/cartpole.py) 
+## Environment: OpenGYM [CartPole-v0](https://github.com/openai/gym/blob/master/gym/envs/classic_control/cartpole.py) 
 **state space**
 
 |Num|Observation|Min|Max|
@@ -21,12 +21,12 @@ The REINFORCE algorithm with policy parameterized by 1 layer Artificial Neural N
 ## Run
 ~~~
 > (optional) cd REINFORCE
-> python train.py --dim_hidden 128 --gamma 0.98 --lr 0.0002 --n_episodes 10000 --log_interval 100 --render False
+> python train.py --dim_hidden 128 --gamma 0.98 --lr 0.00015 --n_episodes 10000 --log_interval 100 --render False
 ~~~
 
 ## Result
 **The average rewards of last 100 episodes**
-![result](result.png)
+![result](assets/result.png)
 
 **Simulation after 10,000 episodes**
 > To be posted ASAP
