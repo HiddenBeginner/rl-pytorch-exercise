@@ -21,7 +21,7 @@ The REINFORCE algorithm with policy parameterized by 1 layer Artificial Neural N
 ## Run
 ~~~
 > (optional) cd REINFORCE
-> python train.py --dim_hidden 128 --gamma 0.98 --lr 0.00015 --n_episodes 10000 --log_interval 100 --render False
+> python train.py --dim_hidden 128 --gamma 0.98 --lr 0.00015 --n_episodes 10000 --log_interval 100 --render 0
 ~~~
 
 ## Result
