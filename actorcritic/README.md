@@ -25,7 +25,7 @@ The ActorCritic algorithm with policy and q-network parameterized by 1 layer Art
 ~~~
 
 ## Result
-**The average rewards of last 3,000 episodes**
+**The average rewards of last 100 episodes**
 ![result](assets/result.png)
 
 **Simulation after 3,000 episodes**
