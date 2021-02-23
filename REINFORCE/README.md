@@ -25,7 +25,7 @@ The REINFORCE algorithm with policy parameterized by 1 layer Artificial Neural N
 ~~~
 
 ## Result
-**The average rewards of last 100 episodes**
+**The average rewards of last 10,000 episodes**
 ![result](assets/result.png)
 
 **Simulation after 10,000 episodes**
