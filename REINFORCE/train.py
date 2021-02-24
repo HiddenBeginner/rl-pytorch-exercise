@@ -1,29 +1,26 @@
 from model import Policy
-from simulator import Trainer
+from agent import REINFORCEAgent
 from utils import plot_result
 
 import gym
-import torch
 import argparse
 
 
-def train(args):
-    gamma = args.gamma
-    lr = args.lr
-    n_episodes = args.n_episodes
-    render = args.render
-    log_interval = args.log_interval
+def main(args):
+    env = gym.make('CartPole-v0')
+    policy = Policy(dim_hidden=args.dim_hidden)
+    agent = REINFORCEAgent(env=env, policy=policy, lr=args.lr, gamma=args.gamma, render=args.render)
 
-    trainer = Trainer(
-        env=env,
-        policy=policy,
-        device=device,
-        render=render,
-        gamma=gamma,
-        lr=lr
-    )
+    scores = 0
+    history = []
+    for i in range(args.n_episodes):
+        scores += agent.run_episode()
+        if (i + 1) % args.print_interval == 0:
+            print(f"[Episode {i + 1}] Avg Score: {scores / args.print_interval:.3f}")
+            history.append(scores / args.print_interval)
+            scores = 0.0
 
-    return trainer.run(n_episodes, log_interval)
+    plot_result(history, args.print_interval)
 
 
 def get_arguments():
@@ -32,7 +29,7 @@ def get_arguments():
     parser.add_argument('--gamma', type=float, default=0.98, help="Discounted rate for future returns.")
     parser.add_argument('--lr', type=float, default=0.00015, help="Learning rate for updating policy's parameters.")
     parser.add_argument('--n_episodes', type=int, default=10000, help="The number of simulations for policy training.")
-    parser.add_argument('--log_interval', type=int, default=100, help="The interval between training status logs.")
+    parser.add_argument('--print_interval', type=int, default=100, help="The interval between training status logs.")
     parser.add_argument('--render', type=int, default=0, help="Whether to render the environment during training, "
                                                               "Note rendering the environment makes training significantly slower.")
     args = parser.parse_args()
@@ -42,13 +39,4 @@ def get_arguments():
 
 if __name__ == '__main__':
     args = get_arguments()
-
-    env = gym.make('CartPole-v0')
-
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    policy = Policy(dim_hidden=args.dim_hidden)
-    policy.to(device)
-
-    # Train
-    history = train(args)
-    plot_result(history, args.log_interval)
+    main(args)
